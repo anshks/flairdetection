@@ -8,7 +8,6 @@ from bson.json_util import dumps
 import praw
 from praw.models import MoreComments
 import pandas as pd
-import logging
 import pymongo	
 from pymongo import MongoClient
 import numpy as np
@@ -35,12 +34,6 @@ app.config['MONGO_URI'] = MONGO_URL
 mongo = MongoAlchemy(app)
 
 """storing"""
-handler = logging.StreamHandler()
-handler.setLevel(logging.DEBUG)
-logger = logging.getLogger('prawcore')
-logger.setLevel(logging.DEBUG)
-logger.addHandler(handler)
-
 reddit = praw.Reddit(client_id='3g4ggl4suqTAIQ', redirect_uri='http://localhost:8080', client_secret='es9JYYwOFw-Fxjp04PDQ64WSwvg', user_agent='praw-test')
 subreddit = reddit.subreddit('india')
 top_subreddit = subreddit.rising()
