@@ -1,8 +1,7 @@
 import praw
 import json
 from flask import request, abort
-from flask.ext import restful
-from flask.ext.restful import reqparse
+from flask_restful import reqparse, Api, Resource
 from flask_rest_service import app, api, mongo
 from bson.objectid import ObjectId
 import pandas as pd
@@ -17,10 +16,9 @@ from nltk.corpus import wordnet as wn
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn import model_selection, naive_bayes, svm
 from sklearn.metrics import accuracy_score
-from pymongo import MongoClient
 from sklearn.externals import joblib
 
-class MyPredictFlair(restful.Resource):
+class MyPredictFlair(Resource):
     def __init__(self, *args, **kwargs):
         self.parser = reqparse.RequestParser()
         self.parser.add_argument('url', type=str)
@@ -64,7 +62,7 @@ class MyPredictFlair(restful.Resource):
         """predictions_SVM[0]"""
 
         
-class Root(restful.Resource):
+class Root(Resource):
     def get(self):
         return {
             'status': 'OK',
