@@ -1,6 +1,6 @@
 import os
 from flask import Flask
-from flask.ext import restful
+from flask_restful import reqparse, Api, Resource
 from flask.ext.mongoalchemy import MongoAlchemy
 #from flask.ext.pymongo import PyMongo
 from flask import make_response
@@ -108,7 +108,7 @@ def output_json(obj, code, headers=None):
     return resp
 
 DEFAULT_REPRESENTATIONS = {'application/json': output_json}
-api = restful.Api(app)
+api = Api(app)
 api.representations = DEFAULT_REPRESENTATIONS
 
 import flask_rest_service.resources
