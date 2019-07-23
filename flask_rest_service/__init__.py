@@ -1,7 +1,8 @@
 import os
 from flask import Flask
 from flask_restful import reqparse, Api, Resource
-from flask.ext.mongoalchemy import MongoAlchemy
+from flask_mongoengine import MongoEngine
+#from flask.ext.mongoalchemy import MongoAlchemy
 #from flask.ext.pymongo import PyMongo
 from flask import make_response
 from bson.json_util import dumps
@@ -29,9 +30,13 @@ if not MONGO_URL:
 
 app = Flask(__name__)
 
-app.config['MONGOALCHEMY_DATABASE'] = 'redditdata'
+"""app.config['MONGOALCHEMY_DATABASE'] = 'redditdata'
 app.config['MONGO_URI'] = MONGO_URL
-mongo = MongoAlchemy(app)
+mongo = MongoAlchemy(app)"""
+#app.config.from_pyfile('the-config.cfg')
+app.config['MONGOENGINE_DATABASE'] = 'redditdata'
+app.config['MONGO_URI'] = MONGO_URL
+mongo = MongoEngine(app)
 
 """storing"""
 reddit = praw.Reddit(client_id='3g4ggl4suqTAIQ', redirect_uri='http://localhost:8080', client_secret='es9JYYwOFw-Fxjp04PDQ64WSwvg', user_agent='praw-test')
